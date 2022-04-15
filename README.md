@@ -1,28 +1,27 @@
 # scrapy-tutorials
 Tutorial on scrapy web scraping framework
 
+# This is github repo for Medium Blog post
+
 # environment setup
 
-pip install scrapy
+```shell
+pip install -r requirements.txt
+```
 
+# run the scrapyd server
 
->>> response
-<200 https://quotes.toscrape.com/>
+```shell
+scrapyd
+```
 
-response.text
+# run locally
 
-response.xpath('//title').get()
-'<title>Quotes to Scrape</title>'
+scrapy crawl quotes
 
->>> quote = response.xpath('//div[@class="quote"]')[0]
->>> quote
-<Selector xpath='//div[@class="quote"]' data='<div class="quote" itemscope itemtype...'>
-> 
-> 
-> 
-> >>> quote.xpath('span/text()').get()
-'“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”'
->>> quote.xpath('span/small/text()').get()
-'Albert Einstein'
-> 
-> 
+# deploy to scrapyd server
+
+```shell
+scrapyd-deploy local -p quotesspider
+scrapyd-client schedule -p quotesspider quotes
+```
